@@ -1,0 +1,31 @@
+version: "3"
+services:
+  mysqldb:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=notesdb
+    ports:
+      - "3306:3306"
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      SPRING_APPLICATION_JSON: '{
+            "spring.datasource.username" : "$MYSQL_USERNAME",
+            "spring.datasource.password" : "$MYSQL_PASSWORD",
+            "spring.datasource.url": "jdbc:mysql://mysqldb:3306/notesdb?createDatabaseIfNotExist=true"
+          }'
+    depends_on:
+      - mysqldb
+    ports:
+      - "8800:8080"
+  client:
+    environment:
+      - WDS_SOCKET_PORT=0
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./frontend
+    ports:
+      - "3333:3000"

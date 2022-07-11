@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: api
+  template:
+    metadata:
+      labels:
+        component: api
+    spec:
+      containers:
+        - name: spring-api
+          image: yoanaes/notes-api
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MYSQL_HOST
+              value: mysql-cluster-ip-service
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_DATABASE
+              value: notesdb
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysqlpassword
+                  key: MYSQL_PASSWORD

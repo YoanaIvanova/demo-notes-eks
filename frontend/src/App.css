@@ -1,0 +1,12 @@
+.note-card {
+  width: 35rem;
+  background-color: #fdffcf !important;
+}
+
+.note-card .card-header {
+  background-color: #fdffcf !important;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
