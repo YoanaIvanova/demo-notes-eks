@@ -22,4 +22,4 @@ jobs:
     - name: Build with Maven
       run: mvn --file ./api/pom.xml --batch-mode --update-snapshots package
     - name: Build the Docker image
-      run: docker build . --file ./api/Dockerfile --tag notes-eks-api:$(date +%s)
+      run: docker build ./api --file ./api/Dockerfile --tag notes-eks-api:$(date +%s)
