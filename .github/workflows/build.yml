@@ -22,7 +22,7 @@ jobs:
     - name: Build Spring Boot app with Maven
       run: mvn --file ./api/pom.xml --batch-mode --update-snapshots package
     - name: Sign in to Docker Hub
-      run: docker login -u ${{secrets.DOCKER_USER}} -p ${{DOCKER_PASSWORD}}
+      run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
     - name: Build Spring Boot app Docker image
       run: docker build ./api --file ./api/Dockerfile --tag notes-eks-api:$(date +%s)
     - name: Push Spring Boot app image to Docker Hub
