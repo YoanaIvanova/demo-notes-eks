@@ -30,7 +30,7 @@ jobs:
         node-version: '18.2.0'
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
-    - run: cd ./frontend
+    - run: cd ../frontend
     - run: npm install
     - run: npm run build
     - run: npm test
