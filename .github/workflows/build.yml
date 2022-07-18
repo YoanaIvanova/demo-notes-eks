@@ -24,7 +24,7 @@ jobs:
     - name: Sign in to Docker Hub
       run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
     - name: Build Spring Boot app Docker image
-      run: docker build ./api --file ./api/Dockerfile --tag ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_SPRING}}:$(date +%s)
+      run: docker build -f Dockerfile -t ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_SPRING}}:latest -t ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_SPRING}}:$(date +%s) ./api
     - name: List Docker images
       run: docker images
     - name: Push Spring Boot app image to Docker Hub
