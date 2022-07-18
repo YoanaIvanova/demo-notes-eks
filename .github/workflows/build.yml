@@ -24,7 +24,7 @@ jobs:
     - name: Sign in to Docker Hub
       run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
     - name: Build Spring Boot app Docker image
-      run: docker build ./api --file ./api/Dockerfile --tag notes-eks-api:$(date +%s)
+      run: docker build ./api --file ./api/Dockerfile --tag ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_SPRING}}:$(date +%s)
     - name: Push Spring Boot app image to Docker Hub
       run: docker push ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_SPRING}}
 
@@ -43,6 +43,6 @@ jobs:
     - run: npm test
       working-directory: frontend
     - name: Build React client Docker image
-      run: docker build ./frontend --file ./frontend/Dockerfile --tag notes-eks-client:$(date +%s)
+      run: docker build ./frontend --file ./frontend/Dockerfile --tag ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_REACT}}:$(date +%s)
     - name: Push React app image to Docker Hub
       run: docker push ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_REACT}}
