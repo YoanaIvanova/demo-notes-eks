@@ -23,12 +23,10 @@ jobs:
       run: mvn --file ./api/pom.xml --batch-mode --update-snapshots package
     - name: Sign in to Docker Hub
       run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
-    - name: Echo date
-      run: echo "$(date +%s)"
     - name: Build Spring Boot app Docker image
       run: docker build -f ./api/Dockerfile -t ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_SPRING}}:latest -t ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_SPRING}}:$(date +%s) ./api
     - name: Push Spring Boot app image to Docker Hub
-      run: docker push ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_SPRING}}
+      run: docker push --all-tags ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_SPRING}}
 
     - name: Set up Node.js for React client
       uses: actions/setup-node@v3
@@ -47,4 +45,4 @@ jobs:
     - name: Build React client Docker image
       run: docker build -f ./frontend/Dockerfile -t ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_REACT}}:latest -t ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_REACT}}:$(date +%s) ./frontend
     - name: Push React app image to Docker Hub
-      run: docker push ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_REACT}}
+      run: docker push --all-tags ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_REACT}}
