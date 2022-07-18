@@ -1,0 +1,37 @@
+name: Build app Docker images
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11 for Spring Boot app
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: Build Spring Boot app with Maven
+      run: mvn --file ./api/pom.xml --batch-mode --update-snapshots package
+    - name: Build Spring Boot app Docker image
+      run: docker build ./api --file ./api/Dockerfile --tag notes-eks-api:$(date +%s)
+    - name: Set up Node.js for React client
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.2.0'
+        cache: 'npm'
+    - run:
+        cd ./frontend
+        npm ci
+        npm run build --if-present
+        npm test
+    - name: Build React client Docker image
+      run: docker build ./frontend --file ./frontend/Dockerfile.dev --tag notes-eks-client:$(date +%s)
