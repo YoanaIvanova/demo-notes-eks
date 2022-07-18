@@ -23,13 +23,13 @@ jobs:
       run: mvn --file ./api/pom.xml --batch-mode --update-snapshots package
     - name: Build Spring Boot app Docker image
       run: docker build ./api --file ./api/Dockerfile --tag notes-eks-api:$(date +%s)
+    - run: cd ./frontend
     - name: Set up Node.js for React client
       uses: actions/setup-node@v3
       with:
         node-version: '18.2.0'
         cache: 'npm'
     - run:
-        cd ./frontend
         npm ci
         npm run build --if-present
         npm test
