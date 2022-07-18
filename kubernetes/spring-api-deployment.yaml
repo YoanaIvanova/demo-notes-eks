@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: spring-api
-          image: yoanaes/notes-api
+          image: yoanaes/notes-api-eks
           ports:
             - containerPort: 8080
           env:
