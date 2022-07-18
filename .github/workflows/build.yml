@@ -30,9 +30,11 @@ jobs:
         node-version: '18.2.0'
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
-    - run: cd ../frontend
     - run: npm install
+      working-directory: frontend
     - run: npm run build
+      working-directory: frontend
     - run: npm test
+      working-directory: frontend
     - name: Build React client Docker image
       run: docker build ./frontend --file ./frontend/Dockerfile.dev --tag notes-eks-client:$(date +%s)
