@@ -1,4 +1,4 @@
-name: Build app Docker images
+name: Build Docker images
 
 on:
   push:
@@ -8,10 +8,9 @@ on:
 
 jobs:
 
-  build:
-
+  build-spring-api:
+    name: Build Spring Boot backend API
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11 for Spring Boot app
@@ -28,6 +27,11 @@ jobs:
     - name: Push Spring Boot app image to Docker Hub
       run: docker push --all-tags ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_SPRING}}
 
+  build-react-client:
+    name: Build React frontend client
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
     - name: Set up Node.js for React client
       uses: actions/setup-node@v3
       with:
@@ -42,6 +46,8 @@ jobs:
         CI: false
     - run: npm test
       working-directory: frontend
+    - name: Sign in to Docker Hub
+      run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
     - name: Build React client Docker image
       run: docker build -f ./frontend/Dockerfile -t ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_REACT}}:latest -t ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_REPO_REACT}}:$(date +%s) ./frontend
     - name: Push React app image to Docker Hub
