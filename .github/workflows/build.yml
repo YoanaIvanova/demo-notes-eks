@@ -72,5 +72,5 @@ jobs:
         ECR_REPOSITORY: ${{ secrets.AWS_REPO_REACT }}
       run: |
         docker build -f ./frontend/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:latest ./frontend
-        echo "Pushing Spring Boot app image to ECR..."
+        echo "Pushing React client image to ECR..."
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
