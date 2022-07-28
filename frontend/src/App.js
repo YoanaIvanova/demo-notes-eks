@@ -29,7 +29,7 @@ function App() {
     <div className="wrapper">
       <Container>
         <Row>
-          <h1 className="mt-5 text-center text-white mb-0"> <BiNotepad size="3rem" /> Demo Notes App</h1>
+          <h1 className="mt-5 text-center text-white mb-0"> <BiNotepad size="3rem" /> Demo Notes App EKS</h1>
         </Row>
         <Row className="justify-content-center">
           <Col className="d-flex justify-content-center">
