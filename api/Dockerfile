@@ -4,4 +4,4 @@ WORKDIR "/app"
 
 COPY /target/notes-api-0.0.1-SNAPSHOT.jar notes-api-0.0.1-SNAPSHOT.jar
 
-ENTRYPOINT ["java", "-jar", "/app/notes-api-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT exec java -DMYSQL_PASSWORD=$MYSQL_PASSWORD -jar notes-api-0.0.1-SNAPSHOT.jar
