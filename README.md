@@ -36,6 +36,7 @@ For more information, check out the [NGINX Ingress controller installation guide
 5. You'll need to create the following secret in your Kubernetes cluster:
 
 `kubectl create secret generic mysqlpassword --from-literal MYSQL_PASSWORD=your_password`
+
 6. Navigate to the demo-notes-eks/kubernetes folder in your local terminal. Run the following command:
 
 `kubectl apply -f kubernetes`
