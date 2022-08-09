@@ -7,6 +7,7 @@ For more information on the Demo Notes App, go to: https://github.com/YoanaIvano
 ## Deploy on Amazon EKS Cluster
 
 **Prerequisites**
+
 * To use this project and deploy it on your own EKS cluster, you'll need to clone this repository and set up the GitHub Actions secrets used in [the GitHub Actions configuration file](https://github.com/YoanaIvanova/demo-notes-eks/blob/main/.github/workflows/build.yml)
 * Make sure you have created an EKS cluster and it's up and running (this has been tested with a EKS cluster with two t3.small nodes)
 * Make sure you have created appropriate Amazon ECR (Elastic Container Registry) repositories for both the front-end and the api parts of this application (the names of these repositories should be stored in the AWS_REPO_SPRING and AWS_REPO_REACT GitHub Actions secrets)
