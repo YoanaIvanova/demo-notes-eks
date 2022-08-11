@@ -30,9 +30,9 @@ If you are prompted for credentials, enter them.
 (replace "us-east-1" with the region your EKS cluster lives in; replace "name-of-your-cluster" with the name of your cluster)
 
 4. You'll need to install the NGINX Ingress controller by executing this command in your local terminal:
-`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.1/deploy/static/provider/cloud/deploy.yaml`
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/aws/deploy.yaml`
 
-For more information, check out the [NGINX Ingress controller installation guide](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start).
+For more information, check out the [NGINX Ingress controller installation guide](https://kubernetes.github.io/ingress-nginx/deploy/#aws).
 
 5. You'll need to create the following secret in your Kubernetes cluster:
 
